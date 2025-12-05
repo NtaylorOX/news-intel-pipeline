@@ -1,0 +1,77 @@
+# News Sources Configuration
+# Configure polling behavior, limits, and enabled status for each source
+
+# Global scheduler settings
+scheduler:
+  interval_minutes: 5  # How often the scheduler job runs (checks all sources)
+  enable_scheduler: true
+  enable_kafka_consumer: true
+
+# Per-source configuration
+sources:
+  HackerNews:
+    enabled: true
+    max_articles: 30
+    timeout_seconds: 10
+    url: "https://news.ycombinator.com"
+    type: "hackernews"
+    
+  TechCrunch:
+    enabled: true
+    max_articles: 30
+    timeout_seconds: 10
+    url: "https://techcrunch.com"
+    feed_url: "https://techcrunch.com/feed/"
+    type: "rss"
+    
+  ArsTechnica:
+    enabled: true
+    max_articles: 30
+    timeout_seconds: 10
+    url: "https://arstechnica.com"
+    feed_url: "https://feeds.arstechnica.com/arstechnica/index"
+    type: "rss"
+    
+  TheVerge:
+    enabled: true
+    max_articles: 30
+    timeout_seconds: 10
+    url: "https://theverge.com"
+    feed_url: "https://www.theverge.com/rss/index.xml"
+    type: "rss"
+    
+  Slashdot:
+    enabled: true
+    max_articles: 30
+    timeout_seconds: 10
+    url: "https://slashdot.org"
+    feed_url: "https://feeds2.slashdot.org/slashdot/slashdot"
+    type: "rss"
+    
+  Reddit-programming:
+    enabled: true
+    max_articles: 25
+    timeout_seconds: 10
+    url: "https://reddit.com/r/programming"
+    type: "reddit"
+    
+  Reddit-compsci:
+    enabled: false  # Disabled by default
+    max_articles: 25
+    timeout_seconds: 10
+    url: "https://reddit.com/r/compsci"
+    type: "reddit"
+    
+  Reddit-cybersecurity:
+    enabled: true
+    max_articles: 25
+    timeout_seconds: 10
+    url: "https://reddit.com/r/cybersecurity"
+    type: "reddit"
+    
+  Reddit-opensource:
+    enabled: true
+    max_articles: 25
+    timeout_seconds: 10
+    url: "https://reddit.com/r/opensource"
+    type: "reddit"
