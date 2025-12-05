@@ -1,6 +1,6 @@
 # News Ingestion Pipeline
 
-A scalable, event-driven news ingestion and analysis platform using microservices, Kafka, and AI-powered content filtering. For detailed information on design decisions, filtering logic, and technical implementation, see [REFLECTION.md](REFLECTION.md). I also discuss the obvious limitations in the current system, the weakness of the AI approach thus far, and suggest improvements. 
+A scalable, event-driven news ingestion and analysis platform using microservices, Kafka, and AI-powered content filtering. 
 
 Below serves as a general walkthrough for setting the services up and running.
 
