@@ -3,7 +3,7 @@
 
 provider: "openai"  # LLM provider: "openai"
 model_name: "gpt-4o-mini"  # OpenAI model to use
-temperature: 0.7  # Controls randomness (0.0 = deterministic, 1.0 = creative)
+temperature: 0.0  # Deterministic output for classification and filtering
 max_tokens: null  # Maximum tokens in response (null = no limit)
 
 # Optional: Model-specific settings

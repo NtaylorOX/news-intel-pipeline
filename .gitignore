@@ -13,4 +13,13 @@ wheels/
 .env
 
 # pytest
-htmlconv
+
+# Coverage / test artefacts
+htmlcov/
+.coverage
+.pytest_cache/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/

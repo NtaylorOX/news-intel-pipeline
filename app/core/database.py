@@ -1,7 +1,7 @@
 """Database models for news articles and ingestion tracking."""
 
 from sqlalchemy import Column, Integer, String, Text, DateTime, Boolean, Float, create_engine
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 import os
@@ -68,6 +68,9 @@ DATABASE_URL = os.getenv(
     "DATABASE_URL",
     "postgresql://postgres:postgres@localhost:5432/news_db"
 )
+# Pin the psycopg2 driver explicitly; newer SQLAlchemy defaults bare "postgresql://" to psycopg 3
+if DATABASE_URL.startswith("postgresql://"):
+    DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+psycopg2://", 1)
 
 # Remove sqlite-specific connection args for PostgreSQL
 if "postgresql" in DATABASE_URL or "postgres" in DATABASE_URL:

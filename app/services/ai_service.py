@@ -72,17 +72,24 @@ class AIService:
         self.system_prompts = SYSTEM_PROMPTS
         self.user_prompts = USER_PROMPTS
         
-        # Initialize LLM based on configuration
-        self.llm = ChatOpenAI(
-            model=self.config.get("model_name", "gpt-4o-mini"),
-            temperature=self.config.get("temperature", 0.7),
-        )
-        
+        # LLM client is created lazily so importing this module never requires credentials
+        self._llm = None
+
         # Initialize structured output parsers
         self.relevance_parser = PydanticOutputParser(pydantic_object=RelevanceClassification)
         self.action_items_parser = PydanticOutputParser(pydantic_object=ActionItemsResponse)
         
         logger.info(f"AIService initialized with model: {self.config.get('model_name')}")
+
+    @property
+    def llm(self) -> ChatOpenAI:
+        """Return the configured chat model, creating it on first use."""
+        if self._llm is None:
+            self._llm = ChatOpenAI(
+                model=self.config.get("model_name", "gpt-4o-mini"),
+                temperature=self.config.get("temperature", 0.7),
+            )
+        return self._llm
 
     def _invoke_llm(self, system_prompt_key: str, content: str) -> str:
         """
@@ -188,7 +195,7 @@ class AIService:
             parsed: ActionItemsResponse = self.action_items_parser.parse(response.content)
             
             return {
-                "action_items": [item.dict() for item in parsed.action_items],
+                "action_items": [item.model_dump() for item in parsed.action_items],
                 "key_trends": parsed.key_trends,
                 "risks": parsed.risks,
                 "opportunities": parsed.opportunities,

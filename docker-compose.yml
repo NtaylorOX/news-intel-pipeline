@@ -107,7 +107,6 @@ services:
     build:
       context: .
       dockerfile: services/analysis/Dockerfile
-    container_name: news_analysis
     depends_on:
       postgres:
         condition: service_healthy
